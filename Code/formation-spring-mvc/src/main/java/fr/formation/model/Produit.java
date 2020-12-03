@@ -3,10 +3,14 @@ package fr.formation.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Produit {
 	private String id;
 	private String label;
 	private BigDecimal price;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate createdOn;
 	private Fournisseur fournisseur;
 
@@ -56,5 +60,10 @@ public class Produit {
 		this.label = label;
 		this.price = price;
 		this.createdOn = LocalDate.now();
+	}
+	
+	@Override
+	public String toString() {
+		return this.label + " - " + this.price + " - " + this.createdOn;
 	}
 }
