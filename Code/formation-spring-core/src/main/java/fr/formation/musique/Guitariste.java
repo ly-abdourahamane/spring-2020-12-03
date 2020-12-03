@@ -12,5 +12,8 @@ public class Guitariste implements IMusicien {
 	}
 	
 	
-	
+
+	public void jouer() {
+		System.out.println("Guitariste joue : " + this.instrument);
+	}
 }
