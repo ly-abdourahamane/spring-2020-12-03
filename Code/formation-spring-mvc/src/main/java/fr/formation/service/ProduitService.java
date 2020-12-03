@@ -4,8 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import fr.formation.model.Produit;
 
+@Service
 public class ProduitService {
 	private List<Produit> produits = new ArrayList<>();
 	
