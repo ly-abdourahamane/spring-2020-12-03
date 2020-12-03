@@ -4,16 +4,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Produit {
-	private int id;
+	private String id;
 	private String label;
 	private BigDecimal price;
 	private LocalDate createdOn;
+	private Fournisseur fournisseur;
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -41,6 +42,14 @@ public class Produit {
 		this.createdOn = createdOn;
 	}
 	
+	public Fournisseur getFournisseur() {
+		return fournisseur;
+	}
+
+	public void setFournisseur(Fournisseur fournisseur) {
+		this.fournisseur = fournisseur;
+	}
+
 	public Produit() { }
 	
 	public Produit(String label, BigDecimal price) {

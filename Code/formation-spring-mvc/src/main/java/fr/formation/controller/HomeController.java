@@ -1,6 +1,7 @@
 package fr.formation.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fr.formation.model.Produit;
 import fr.formation.service.ProduitService;
 
 @Controller
@@ -55,7 +55,6 @@ public class HomeController {
 	}
 	
 	@GetMapping({ "/home-variable/{a}", "/home-variable/{username}/{a}" })
-//	public String homeWithParam(HttpServletRequest req) {
 	public String homeWithVariable(
 			@PathVariable(required = false) String username,
 			@PathVariable int a,
@@ -65,6 +64,24 @@ public class HomeController {
 		
 		System.out.println(a);
 		model.addAttribute("utilisateur", username);
+		
+		return "home";
+	}
+	
+	@GetMapping("/home-data-binding")
+//	public String homeDataBinding(
+//			@RequestParam String label,
+//			@RequestParam BigDecimal price) {
+	//...?label=Test&price=42&id=77&fournisseur.id=12
+	public String homeDataBinding(Produit produit, @RequestParam List<String> label) {
+//		Produit produit = new Produit();
+		
+//		produit.setLabel(label);
+//		produit.setPrice(price);
+		
+		System.out.println(label);
+		System.out.println(produit.getId() + " + " + produit.getLabel() + " - " + produit.getPrice());
+		System.out.println(produit.getFournisseur().getId());
 		
 		return "home";
 	}
