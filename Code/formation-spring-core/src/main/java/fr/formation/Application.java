@@ -32,6 +32,9 @@ public class Application {
 	}
 	
 	public void run() {
+		System.out.println("Thread = " + Thread.currentThread().getName());
 		this.guitariste.jouer();
+		//App -> Guitariste (au travers d'un proxy créé par Spring) -> jouerAsync()
+		System.out.println("Le guitariste va jouer ...");
 	}
 }
