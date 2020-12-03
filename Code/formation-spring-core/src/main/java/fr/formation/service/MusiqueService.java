@@ -1,5 +1,6 @@
 package fr.formation.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import fr.formation.musique.IMusicien;
 
 @Service
 public class MusiqueService {
-//	@Autowired
+	@Autowired
 	@Qualifier("pianiste")
 //	@Resource("${musicien}") //On passe par la resource parce que le contenu de @Qualifier ne peut pas être SpEL
 	private IMusicien guitariste;
