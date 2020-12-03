@@ -5,14 +5,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+
+	<context:component-scan base-package="fr.formation" />
 	
-	<bean id="guitare" class="fr.formation.musique.Guitare" />
+	<!-- <bean id="guitare" class="fr.formation.musique.Guitare" />
 	
 	<bean id="guitariste" class="fr.formation.musique.Guitariste">
 		<property name="instrument" ref="guitare" />
 		
-		<!-- <property name="instrument">
+		<property name="instrument">
 			<bean class="fr.formation.musique.Guitare" />
-		</property> -->
-	</bean>
+		</property>
+	</bean> -->
 </beans>
