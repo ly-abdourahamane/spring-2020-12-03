@@ -46,6 +46,7 @@
 				</div>
 				
 				<div class="card-footer">
+					<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }" />
 					<input type="submit" class="btn btn-success" value="Ajouter" />
 					<a class="btn btn-danger" href="produit">Annuler</a>
 				</div>
