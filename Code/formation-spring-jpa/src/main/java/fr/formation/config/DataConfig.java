@@ -14,8 +14,10 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 public class DataConfig {
 	@Bean
 	public DataSource dataSource() {
@@ -32,7 +34,7 @@ public class DataConfig {
 		JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		
 		emf.setDataSource(dataSource);
-		emf.setPackagesToScan("fr.formation.Model");
+		emf.setPackagesToScan("fr.formation.model");
 		emf.setJpaVendorAdapter(adapter);
 		emf.setJpaProperties(this.hibernateProperties());
 		
@@ -45,11 +47,11 @@ public class DataConfig {
 //		props.setProperty("hibernate.hbm2ddl.auto", "update");
 		props.setProperty("hibernate.show_sql", "true");
 		
-		
 		return props;
 	}
 	
 	//GESTIONNAIRE DE TRANSACTIONS
+	@Bean
 	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
 		return new JpaTransactionManager(emf);
 	}

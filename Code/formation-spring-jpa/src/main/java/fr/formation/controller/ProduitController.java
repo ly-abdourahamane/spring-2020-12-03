@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,25 +36,25 @@ public class ProduitController {
 	}
 	
 	@PostMapping("/ajouter")
-	public String add(@Valid Produit produit, BindingResult result, Model model) {
+	public String add(@ModelAttribute("produit") @Valid Produit produit, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			result.getFieldErrors().forEach(fe -> {
-				if (fe.getField().equals("label")) {
-					model.addAttribute("labelError", "Le label doit être saisi !");
-				}
-			});
-			
 			model.addAttribute("errors", result.getFieldErrors()
 				.stream()
 				.map(FieldError::getField)
 				.distinct()
 				.collect(Collectors.toList()));
 			
+//			model.addAttribute("produit", produit);
 			return "produit/form";
 		}
 		
 		this.srvProduit.add(produit);
 		
 		return "redirect:/produit";
+	}
+	
+	@ModelAttribute("demo")
+	public String modelDemo() {
+		return "Démo coucou";
 	}
 }

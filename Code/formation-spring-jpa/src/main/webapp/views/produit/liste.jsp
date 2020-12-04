@@ -4,6 +4,8 @@
 <t:layout>
 	<jsp:attribute name="title">Liste des produits</jsp:attribute>
 	<jsp:body>
+		${ demo }
+		
 		<a class="btn btn-primary" href="produit/ajouter">Ajouter un produit</a>
 
 		<table class="table table-striped">

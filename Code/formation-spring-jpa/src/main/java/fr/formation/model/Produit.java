@@ -34,9 +34,9 @@ public class Produit {
 	@Positive
 	private BigDecimal price;
 
-	
 	@Column(name = "PRO_CREATED_ON", nullable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
 	private LocalDate createdOn;
 
 	public int getId() {
