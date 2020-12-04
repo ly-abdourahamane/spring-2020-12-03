@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Lazy
 @Scope("prototype") //prototype | singleton (par défaut)
 //session | request ==> contexte web (tomcat / spring boot + starter-web)
-public class Guitariste implements IMusicien {
+public class Guitariste extends AbstractMusicien implements IMusicien {
 	@Autowired
 	private IInstrument instrument;
 	
@@ -27,10 +27,17 @@ public class Guitariste implements IMusicien {
 //	@Log
 	public void jouer() {
 		System.out.println("Guitariste joue : " + this.instrument);
+		this.abstractJouer("test");
 	}
 
 	public String jouer(String morceau) {
 		System.out.println("Guitariste joue le morceau : " + morceau);
 		return this.instrument.toString();
+	}
+
+	@Override
+	public String abstractJouer(String morceau) {
+		System.out.println("ABSTRACT");
+		return "ok";
 	}
 }

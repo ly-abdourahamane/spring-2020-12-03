@@ -44,8 +44,13 @@ public class LoggingAspect {
 		return null;
 	}
 	
-	@Before("execution(* fr.formation.musique.IMusicien.*(..))")
-	public void beforeMusicienJouer() {
-		System.out.println("BEFORE JOUER");
+//	@Before("execution(* fr.formation.musique.IMusicien.*(..))")
+//	public void beforeMusicienJouer() {
+//		System.out.println("BEFORE JOUER");
+//	}
+	
+	@Before("execution(* fr.formation.musique.Guitariste.abstractJouer(..))")
+	public void beforeMusicienJouerAbstract() {
+		System.out.println("BEFORE JOUER ABSTRACT");
 	}
 }
