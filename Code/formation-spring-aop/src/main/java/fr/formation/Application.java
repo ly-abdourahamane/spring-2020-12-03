@@ -19,6 +19,6 @@ public class Application {
 	}
 	
 	public void run() {
-		this.guitariste.jouer();
+		this.guitariste.jouer("Shakira");
 	}
 }

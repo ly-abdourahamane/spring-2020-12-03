@@ -5,8 +5,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import fr.formation.annotation.Log;
-
 @Component("LeGuitariste")
 @Lazy
 @Scope("prototype") //prototype | singleton (par défaut)
@@ -25,14 +23,14 @@ public class Guitariste implements IMusicien {
 		this.instrument = instrument;
 		System.out.println(this.instrument);
 	}
-	
-//	@PostConstruct
-//	public void init() {
-//		System.out.println(this.instrument);
-//	}
 
-	@Log
+//	@Log
 	public void jouer() {
 		System.out.println("Guitariste joue : " + this.instrument);
+	}
+
+	public String jouer(String morceau) {
+		System.out.println("Guitariste joue le morceau : " + morceau);
+		return this.instrument.toString();
 	}
 }
