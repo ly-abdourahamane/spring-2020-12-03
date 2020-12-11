@@ -1,7 +1,7 @@
 package fr.formation.security;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,7 +20,11 @@ public class UtilisateurPrincipal implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if (this.utilisateur.isAdmin()) {
 			//ROLE_? => Définir un rôle (hasRole('ADMIN') ou hasAuthority('ROLE_ADMIN')
-			return Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"));
+			return Arrays.asList(
+				new SimpleGrantedAuthority("ROLE_ADMIN"),
+				new SimpleGrantedAuthority("PRODUIT_READ_PRIVILEGES"),
+				new SimpleGrantedAuthority("PRODUIT_WRITE_PRIVILEGES")
+			);
 			
 			//Au chargement, on vérifie pour un user tous les objets auquel il a droit
 			//Liste d'autorités = PRODUIT_WRITE_PRIVILEGES, PRODUIT_1_RO, PRODUIT_2_RW, PRODUIT_3_RW, PRODUIT_5_RW, ...
@@ -28,7 +32,10 @@ public class UtilisateurPrincipal implements UserDetails {
 //			return Collections.singleton(new SimpleGrantedAuthority("PRODUIT_WRITE_PRIVILEGES"));
 		}
 		
-		return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
+		return Arrays.asList(
+			new SimpleGrantedAuthority("ROLE_USER"),
+			new SimpleGrantedAuthority("PRODUIT_READ_PRIVILEGES")
+		);
 	}
 
 	@Override

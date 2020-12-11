@@ -29,7 +29,8 @@ public class ProduitController {
 	
 	@GetMapping
 	//produit?sort=label,desc&price,asc
-	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+//	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
+	@PreAuthorize("hasPermission('produit', 'read')")
 	public String findAll(Authentication auth, Pageable page, Model model) {
 //		model.addAttribute("produits", this.srvProduit.findAll(page));
 		model.addAttribute("produits", this.srvProduit.findAllSpec(auth));
@@ -38,13 +39,15 @@ public class ProduitController {
 	}
 	
 	@GetMapping("/ajouter")
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasPermission('produit', 'write')")
 	public String add() {
 		return "produit/form";
 	}
 	
 	@PostMapping("/ajouter")
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasPermission('produit', 'write')")
 	public String add(@ModelAttribute("produit") @Valid Produit produit, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("errors", result.getFieldErrors()
