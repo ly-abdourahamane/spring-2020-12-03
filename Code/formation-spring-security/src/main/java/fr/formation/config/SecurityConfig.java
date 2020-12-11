@@ -3,12 +3,15 @@ package fr.formation.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 
 import fr.formation.security.AuthService;
 
@@ -19,6 +22,9 @@ import fr.formation.security.AuthService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthService srvAuth;
+	
+	@Autowired
+	private PermissionEvaluator formationPermissionEvaluator;
 	
 	//GESTION DES ACCES GENERIQUES
 	@Override
@@ -53,6 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //			.withUser("user").password("{noop}123456").roles("USER")
 			.userDetailsService(this.srvAuth)
 			;
+	}
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler();
+		
+		handler.setPermissionEvaluator(this.formationPermissionEvaluator);
+		web.expressionHandler(handler);
 	}
 	
 	@Bean

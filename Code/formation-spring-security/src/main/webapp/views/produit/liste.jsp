@@ -1,13 +1,16 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="t" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <t:layout>
 	<jsp:attribute name="title">Liste des produits</jsp:attribute>
 	<jsp:body>
 		${ demo }
 		
-		<a class="btn btn-primary" href="produit/ajouter">Ajouter un produit</a>
-
+		<sec:authorize access="hasPermission('produit', 'write')">
+			<a class="btn btn-primary" href="produit/ajouter">Ajouter un produit</a>
+		</sec:authorize>
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
