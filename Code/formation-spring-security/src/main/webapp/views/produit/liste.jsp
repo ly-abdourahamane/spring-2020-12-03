@@ -5,6 +5,13 @@
 <t:layout>
 	<jsp:attribute name="title">Liste des produits</jsp:attribute>
 	<jsp:body>
+		<form method="POST" action="deconnexion">
+			<input type="hidden" name="${ _csrf.parameterName }" value="${ _csrf.token }" />
+			<input class="btn btn-danger" type="submit" value="Se déconnecter" />
+		</form>
+		
+		<a class="btn btn-danger" href="deco">Déconnexion GET (par nos soins)</a>
+		
 		${ demo }
 		
 		<sec:authorize access="hasPermission('produit', 'write')">

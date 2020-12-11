@@ -1,5 +1,6 @@
 package fr.formation.controller;
 
+import java.security.Principal;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fr.formation.model.Produit;
+import fr.formation.security.UtilisateurPrincipal;
 import fr.formation.service.ProduitService;
 
 @Controller
@@ -31,9 +33,16 @@ public class ProduitController {
 	//produit?sort=label,desc&price,asc
 //	@PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
 	@PreAuthorize("hasPermission('produit', 'read')")
-	public String findAll(Authentication auth, Pageable page, Model model) {
+	public String findAll(Authentication auth, Principal principal, Pageable page, Model model) {
 //		model.addAttribute("produits", this.srvProduit.findAll(page));
 		model.addAttribute("produits", this.srvProduit.findAllSpec(auth));
+		
+		//Pour récupérer le UtilisateurPrincipal et éventuellement l'objet utilisateur
+		if (auth.getPrincipal() instanceof UtilisateurPrincipal) {
+			System.out.println(((UtilisateurPrincipal)auth.getPrincipal()).getUtilisateur().getPassword());
+			
+			System.out.println(auth.getName());
+		}
 		
 		return "produit/liste";
 	}

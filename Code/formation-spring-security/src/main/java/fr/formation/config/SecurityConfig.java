@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import fr.formation.security.AuthService;
 
@@ -35,13 +37,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.formLogin()
 				.loginPage("/connexion")
-				.loginProcessingUrl("/process_connexion")
+				.loginProcessingUrl("/process_connexion") //MAPPING POST CREE PAR SPRING
 				.defaultSuccessUrl("/home", false)
 				.failureUrl("/connexion?erreur=true")
+//				.successHandler(AuthenticationSuccessHandler) //Classe à créer
+//				.failureHandler(AuthenticationFailureHandler) //Classe à créer
 				.permitAll()
 			.and()
 			.logout()
-				.logoutUrl("/deconnexion")
+				.logoutUrl("/deconnexion") //MAPPING POST CREE PAR SPRING
+				.addLogoutHandler(new DemoLogoutHandler())
 				.logoutSuccessUrl("/connexion")
 			
 //			.and().csrf().disable() //Désactiver CSRF

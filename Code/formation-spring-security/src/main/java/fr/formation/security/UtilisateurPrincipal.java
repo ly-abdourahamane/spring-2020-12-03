@@ -16,6 +16,10 @@ public class UtilisateurPrincipal implements UserDetails {
 		this.utilisateur = utilisateur;
 	}
 	
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if (this.utilisateur.isAdmin()) {
@@ -65,6 +69,6 @@ public class UtilisateurPrincipal implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return !this.utilisateur.isDesactive();
 	}
 }

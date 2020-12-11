@@ -25,6 +25,9 @@ public class Utilisateur {
 	@Column(name = "UTI_ADMIN", nullable = false)
 	private boolean admin;
 
+	@Column(name = "UTI_DESACTIVE", nullable = false)
+	private boolean desactive;
+
 	public int getId() {
 		return id;
 	}
@@ -55,5 +58,13 @@ public class Utilisateur {
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public boolean isDesactive() {
+		return desactive;
+	}
+
+	public void setDesactive(boolean desactive) {
+		this.desactive = desactive;
 	}
 }
