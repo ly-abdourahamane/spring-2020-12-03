@@ -28,7 +28,7 @@ public class Produit {
 //	@NotBlank(message = "pas vide !")
 	private String label;
 	
-	@Column(name = "PRO_PRICE", scale = 10, precision = 2, nullable = false)
+	@Column(name = "PRO_PRICE", scale = 2, precision = 10, nullable = false)
 //	@NotNull
 //	@Positive
 	private BigDecimal price;

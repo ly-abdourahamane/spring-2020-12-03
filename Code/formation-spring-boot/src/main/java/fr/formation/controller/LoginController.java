@@ -14,7 +14,7 @@ public class LoginController {
 	
 	@GetMapping("/deco")
 	public String disconnect(HttpSession session) {
-		session.invalidate(); //Détruire la session
+		session.invalidate(); //Dï¿½truire la session
 		
 		return "redirect:/connexion";
 	}
