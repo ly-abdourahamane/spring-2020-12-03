@@ -19,7 +19,13 @@ public class UtilisateurPrincipal implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if (this.utilisateur.isAdmin()) {
+			//ROLE_? => Définir un rôle (hasRole('ADMIN') ou hasAuthority('ROLE_ADMIN')
 			return Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"));
+			
+			//Au chargement, on vérifie pour un user tous les objets auquel il a droit
+			//Liste d'autorités = PRODUIT_WRITE_PRIVILEGES, PRODUIT_1_RO, PRODUIT_2_RW, PRODUIT_3_RW, PRODUIT_5_RW, ...
+			
+//			return Collections.singleton(new SimpleGrantedAuthority("PRODUIT_WRITE_PRIVILEGES"));
 		}
 		
 		return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
