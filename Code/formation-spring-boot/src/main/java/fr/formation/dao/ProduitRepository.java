@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import fr.formation.model.Produit;
+import fr.formation.projection.ProduitProjection;
 
 public interface ProduitRepository extends JpaRepository<Produit, Integer>, JpaSpecificationExecutor<Produit> {
 //	public List<Produit> findByPrice(BigDecimal price, Pageable page);
@@ -40,6 +41,9 @@ public interface ProduitRepository extends JpaRepository<Produit, Integer>, JpaS
 	public List<LocalDate> findCreatedOn();
 
 //	public List<ProduitProjection> findAllByLabelContaining(String label);
+	
+	@Query("select p from Produit p")
+	public List<ProduitProjection> findAllProjected();
 
 	@Query("select p from Produit p")
 	public <T> List<T> findAll(Class<T> clz);

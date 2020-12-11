@@ -7,6 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import fr.formation.projection.Views;
+
 
 @Entity
 @Table(name = "utilisateur")
@@ -14,6 +18,7 @@ public class Utilisateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "UTI_ID")
+	@JsonView(Views.Commons.class)
 	private int id;
 	
 	@Column(name = "UTI_USERNAME", length = 50, nullable = false)
