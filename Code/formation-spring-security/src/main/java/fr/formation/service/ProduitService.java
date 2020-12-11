@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import fr.formation.dao.ProduitRepository;
@@ -31,6 +32,9 @@ public class ProduitService {
 
 //	@PostFilter("hasPermission(returnObject, 'PRODUIT', 'READ')") //Si on veut filtrer la liste retournée, pour enlever des produits auxquels on aurait pas accès
 	public List<Produit> findAllSpec(Authentication auth) {
+		//Permettra d'éviter d'injecter Authentication dans les arguments de méthodes
+		Authentication auth2 = SecurityContextHolder.getContext().getAuthentication();
+		
 		if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
 			return this.daoProduit.findAll();
 		}
